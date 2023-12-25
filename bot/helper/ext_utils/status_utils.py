@@ -11,18 +11,18 @@ SIZE_UNITS = ["B", "KB", "MB", "GB", "TB", "PB"]
 
 
 class MirrorStatus:
-    STATUS_UPLOADING = "Upload"
-    STATUS_DOWNLOADING = "Download"
-    STATUS_CLONING = "Clone"
-    STATUS_QUEUEDL = "QueueDl"
-    STATUS_QUEUEUP = "QueueUp"
-    STATUS_PAUSED = "Pause"
-    STATUS_ARCHIVING = "Archive"
-    STATUS_EXTRACTING = "Extract"
-    STATUS_SPLITTING = "Split"
-    STATUS_CHECKING = "CheckUp"
-    STATUS_SEEDING = "Seed"
-    STATUS_SAMVID = "SamVid"
+    STATUS_UPLOADING = "📤 Upload"
+    STATUS_DOWNLOADING = "📥 Download"
+    STATUS_CLONING = "🌀 Clone"
+    STATUS_QUEUEDL = "🪫 QueueDl"
+    STATUS_QUEUEUP = "🔋 QueueUp"
+    STATUS_PAUSED = "⏸ Pause"
+    STATUS_ARCHIVING = "🔒 Archive"
+    STATUS_EXTRACTING = "🔓 Extract"
+    STATUS_SPLITTING = "✂️ Split"
+    STATUS_CHECKING = "🔍 CheckUp"
+    STATUS_SEEDING = "🧲 Seed"
+    STATUS_SAMVID = "🛡 SamVid"
 
 
 STATUS_VALUES = [
@@ -94,8 +94,8 @@ def get_progress_bar_string(pct):
     pct = float(pct.strip("%"))
     p = min(max(pct, 0), 100)
     cFull = int(p // 8)
-    p_str = "■" * cFull
-    p_str += "□" * (12 - cFull)
+    p_str = "⬢" * cFull
+    p_str += "⬡" * (12 - cFull)
     return f"[{p_str}]"
 
 
@@ -142,21 +142,21 @@ def get_readable_message(sid, is_user, page_no=1, status="All", page_step=1):
             MirrorStatus.STATUS_SAMVID,
         ]:
             msg += f"\n{get_progress_bar_string(task.progress())} {task.progress()}"
-            msg += f"\n<b>Processed:</b> {task.processed_bytes()} of {task.size()}"
-            msg += f"\n<b>Speed:</b> {task.speed()} | <b>ETA:</b> {task.eta()}"
+            msg += f"\n<b>🛠 Processed:</b> {task.processed_bytes()} of {task.size()}"
+            msg += f"\n<b>📡 Speed:</b> {task.speed()} | <b>⏳ ETA:</b> {task.eta()}"
             if hasattr(task, "seeders_num"):
                 try:
                     msg += f"\n<b>Seeders:</b> {task.seeders_num()} | <b>Leechers:</b> {task.leechers_num()}"
                 except:
                     pass
         elif tstatus == MirrorStatus.STATUS_SEEDING:
-            msg += f"\n<b>Size: </b>{task.size()}"
-            msg += f"\n<b>Speed: </b>{task.seed_speed()}"
-            msg += f" | <b>Uploaded: </b>{task.uploaded_bytes()}"
-            msg += f"\n<b>Ratio: </b>{task.ratio()}"
-            msg += f" | <b>Time: </b>{task.seeding_time()}"
+            msg += f"\n<b>📦 Size: </b>{task.size()}"
+            msg += f"\n<b>📡 Speed: </b>{task.seed_speed()}"
+            msg += f" | <b>📤 Uploaded: </b>{task.uploaded_bytes()}"
+            msg += f"\n<b>🗜 Ratio: </b>{task.ratio()}"
+            msg += f" | <b>⏱ Time: </b>{task.seeding_time()}"
         else:
-            msg += f"\n<b>Size: </b>{task.size()}"
+            msg += f"\n<b>📦 Size: </b>{task.size()}"
         msg += f"\n<code>/{BotCommands.CancelTaskCommand} {task.gid()}</code>\n\n"
 
     if len(msg) == 0 and status == "All":
@@ -179,6 +179,6 @@ def get_readable_message(sid, is_user, page_no=1, status="All", page_step=1):
                 buttons.ibutton(label, f"status {sid} st {status_value}")
     buttons.ibutton("♻️", f"status {sid} ref", position="header")
     button = buttons.build_menu(8)
-    msg += f"<b>CPU:</b> {cpu_percent()}% | <b>FREE:</b> {get_readable_file_size(disk_usage(DOWNLOAD_DIR).free)}"
-    msg += f"\n<b>RAM:</b> {virtual_memory().percent}% | <b>UPTIME:</b> {get_readable_time(time() - botStartTime)}"
+    msg += f"<b>⚙️ CPU:</b> {cpu_percent()}% | <b>💿 FREE:</b> {get_readable_file_size(disk_usage(DOWNLOAD_DIR).free)}"
+    msg += f"\n<b>💽 RAM:</b> {virtual_memory().percent}% | <b>⏰ UPTIME:</b> {get_readable_time(time() - botStartTime)}"
     return msg, button
