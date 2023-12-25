@@ -239,7 +239,7 @@ class TaskListener(TaskConfig):
             msg += f"\n<b>🗃 Total Files: </b>{folders}"
             if mime_type != 0:
                 msg += f"\n<b>🗑 Corrupted Files: </b>{mime_type}"
-            msg += f"\n<b>👤 User: </b>{self.tag}\n"
+            msg += f"\n\n<b>👤 User: </b>{self.tag}\n"
             if not files:
                 await sendMessage(self.message, msg)
             else:
@@ -307,7 +307,7 @@ class TaskListener(TaskConfig):
             else:
                 msg += f"\n🎫 Path: <code>{rclonePath}</code>"
                 button = None
-            msg += f"\n<b>👤 User: </b>{self.tag}"
+            msg += f"\n\n<b>👤 User: </b>{self.tag}"
             await sendMessage(self.message, msg, button)
             if self.seed:
                 if self.newDir:
