@@ -91,12 +91,10 @@ class TelegramDownloadHelper:
         elif not self._is_cancelled:
             await self._onDownloadError("Internal error occurred")
 
-    async def add_download(self, message, path):
-        if (
-            self._listener.session not in ["user", "bot"]
-            and self._listener.userTransmission
-        ):
-            self._listener.session = "user"
+    async def add_download(self, message, path, session):
+        self.session = session
+        if self.session not in ["user", "bot"] and self._listener.userTransmission:
+            self.session = "user"
             message = await user.get_messages(
                 chat_id=message.chat.id, message_ids=message.id
             )
