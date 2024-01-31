@@ -25,7 +25,6 @@ class TelegramDownloadHelper:
         self._start_time = time()
         self._listener = listener
         self._id = ""
-        self.session = ""
         self._is_cancelled = False
 
     @property
@@ -56,7 +55,7 @@ class TelegramDownloadHelper:
 
     async def _onDownloadProgress(self, current, total):
         if self._is_cancelled:
-            if self.session == "user":
+            if self._listener.session == "user":
                 user.stop_transmission()
             else:
                 bot.stop_transmission()
@@ -99,8 +98,8 @@ class TelegramDownloadHelper:
             message = await user.get_messages(
                 chat_id=message.chat.id, message_ids=message.id
             )
-        elif self.session != "user":
-            self.session = "bot"
+        elif self._listener.session != "user":
+            self._listener.session = "bot"
 
         media = (
             message.document
