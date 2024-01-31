@@ -7,8 +7,7 @@ from bot.helper.ext_utils.status_utils import MirrorStatus, get_readable_time
 
 def get_download(gid, old_info=None):
     try:
-        res = aria2.get_download(gid)
-        return res if res else old_info
+        return aria2.get_download(gid)
     except Exception as e:
         LOGGER.error(f"{e}: Aria2c, Error while getting torrent info")
         return old_info
