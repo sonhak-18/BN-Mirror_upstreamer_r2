@@ -11,8 +11,8 @@ SIZE_UNITS = ["B", "KB", "MB", "GB", "TB", "PB"]
 
 
 class MirrorStatus:
-    STATUS_UPLOADING = "📤 Upload"
-    STATUS_DOWNLOADING = "📥 Download"
+    STATUS_UPLOADING = "Upload"
+    STATUS_DOWNLOADING = "Download"
     STATUS_CLONING = "🌀 Clone"
     STATUS_QUEUEDL = "🪫 QueueDl"
     STATUS_QUEUEUP = "🔋 QueueUp"
